@@ -25,11 +25,12 @@ def get_gemini_api_response(prompt: str) -> str:
     return resp.choices[0].message.content
 
 def leadScoring(chat: str, threshold=8) -> dict:
+    response = get_gemini_api_response("سلام")
     return {
   "criteria": {
     "intent": {
       "score": 1,
-      "explanation": "The customer shows some interest in the services by asking to recharge their account, indicating a desire to use the product. However, there is no explicit mention of a strong intent to purchase additional services or products."
+      "explanation": response + "The customer shows some interest in the services by asking to recharge their account, indicating a desire to use the product. However, there is no explicit mention of a strong intent to purchase additional services or products."
     },
     "ask about price": {
       "score": 2,
@@ -112,11 +113,12 @@ def leadScoring(chat: str, threshold=8) -> dict:
     {chat}
     \"\"\"
     """
-    prompt_template = ChatPromptTemplate.from_template(prompt)
+    # prompt_template = ChatPromptTemplate.from_template(prompt)
 
     # chain: Runnable = prompt_template | llm | StrOutputParser()
     # response = chain.invoke({"chat": chat})
     response = get_gemini_api_response(prompt.replace("{chat}", chat))
+    
     cleaned = json_parser(response)
     scores_raw = cleaned["criteria"]
     scores = {key: value["score"] for key, value in scores_raw.items()}
