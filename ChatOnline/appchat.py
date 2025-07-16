@@ -8,6 +8,15 @@ st.set_page_config(page_title="Lead Scoring Chat", layout="wide")
 
 st.title("💬 Persian Lead Scoring Chatbot")
 st.markdown("شبیه‌سازی گفت‌وگوی مشتری و فروشنده. ابتدا فروشنده پیام می‌دهد، سپس شما پاسخ دهید. در پایان، روی «امتیازدهی» بزنید.")
+st.markdown("""
+    <style>
+    .block-container {
+        direction: rtl;
+        text-align: right;
+        font-family: 'Vazirmatn', sans-serif;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Define static content
 FAQ = """سوال: کسب‌وکارتون چیه و در چه حوزه‌ای فعالیت می‌کنید؟
