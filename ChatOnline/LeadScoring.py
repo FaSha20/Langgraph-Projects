@@ -91,12 +91,12 @@ def leadScoring(chat: str, threshold=8) -> dict:
     {chat}
     \"\"\"
     """
-    prompt_template = ChatPromptTemplate.from_template(prompt)
-    llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
-    chain: Runnable = prompt_template | llm | StrOutputParser()
-    response = chain.invoke({"chat": chat})
+    # prompt_template = ChatPromptTemplate.from_template(prompt)
+    # llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    # chain: Runnable = prompt_template | llm | StrOutputParser()
+    # response = chain.invoke({"chat": chat})
     
-    # response = get_gemini_api_response(prompt.replace("{chat}", chat))
+    response = get_gemini_api_response(prompt.replace("{chat}", chat))
     
     cleaned = json_parser(response)
     scores_raw = cleaned["criteria"]
