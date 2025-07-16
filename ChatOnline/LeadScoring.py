@@ -10,10 +10,10 @@ import streamlit as st
 
 load_dotenv()
 
-# api_key = st.secrets["OPENAI_API_KEY"]
-# base_url = st.secrets["OPENAI_BASE_URL"]
-api_key ="AIzaSyBpizwBkvyHbLLhLrbRurRNwLnt1BR_r-c"
-base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
+api_key = st.secrets["OPENAI_API_KEY"]
+base_url = st.secrets["OPENAI_BASE_URL"]
+# api_key ="AIzaSyBpizwBkvyHbLLhLrbRurRNwLnt1BR_r-c"
+# base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
 client = openai.OpenAI(
     api_key=api_key,
