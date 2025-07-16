@@ -1,19 +1,23 @@
 import re
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import Runnable
 import json
 from dotenv import load_dotenv
 import openai
+import streamlit as st
 
 load_dotenv()
 
+api_key = st.secrets["OPENAI_API_KEY"]
+base_url = st.secrets["OPENAI_BASE_URL"]
+
 client = openai.OpenAI(
-    api_key="AIzaSyBpizwBkvyHbLLhLrbRurRNwLnt1BR_r-c",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=api_key,
+    base_url=base_url
 )
-LLM_API_MODEL = "gemini-2.0-flash-lite"
+LLM_API_MODEL = "gpt-4o-mini"
 
 def get_gemini_api_response(prompt: str) -> str:
     resp = client.chat.completions.create(
@@ -40,7 +44,7 @@ def leadScoring(chat: str, threshold=8) -> dict:
         else:
             print("⚠️ No JSON object found.")
 
-    llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    # llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
     prompt = """
     شما یک دستیار بازاریابی هستید که چت بین فروشنده و مشتری شرکت را تحلیل می‌کنید.
     هدف: امتیازدهی به کیفیت لید بر اساس ۵ معیار زیر است ، برای اینکه مشخص شود آیا باید به کارشناس انسانی ارجاع داده شود یا خیر.
@@ -85,11 +89,11 @@ def leadScoring(chat: str, threshold=8) -> dict:
     {chat}
     \"\"\"
     """
-    prompt_template = ChatPromptTemplate.from_template(prompt)
+    # prompt_template = ChatPromptTemplate.from_template(prompt)
 
-    chain: Runnable = prompt_template | llm | StrOutputParser()
-    response = chain.invoke({"chat": chat})
-    # response = get_gemini_api_response(prompt.replace("{chat}", chat))
+    # chain: Runnable = prompt_template | llm | StrOutputParser()
+    # response = chain.invoke({"chat": chat})
+    response = get_gemini_api_response(prompt.replace("{chat}", chat))
     return {
   "criteria": {
     "intent": {
