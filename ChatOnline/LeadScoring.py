@@ -5,7 +5,7 @@ from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import Runnable
 import json
 from dotenv import load_dotenv
-# import openai
+import openai
 
 load_dotenv()
 
