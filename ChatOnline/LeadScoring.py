@@ -17,7 +17,7 @@ client = openai.OpenAI(
     api_key=api_key,
     base_url=base_url
 )
-LLM_API_MODEL = "gpt-4o-mini"
+LLM_API_MODEL = "gemini-2.0-flash-lite"
 
 def get_gemini_api_response(prompt: str) -> str:
     resp = client.chat.completions.create(
