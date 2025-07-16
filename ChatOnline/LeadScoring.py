@@ -85,7 +85,7 @@ def leadScoring(chat: str, threshold=8) -> dict:
     {chat}
     \"\"\"
     """
-    # prompt_template = ChatPromptTemplate.from_template(prompt)
+    prompt_template = ChatPromptTemplate.from_template(prompt)
 
     chain: Runnable = prompt_template | llm | StrOutputParser()
     response = chain.invoke({"chat": chat})
