@@ -46,7 +46,7 @@ def leadScoring(chat: str, threshold=8) -> dict:
         else:
             print("⚠️ No JSON object found.")
 
-    # llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    
     prompt = """
     شما یک دستیار بازاریابی هستید که چت بین فروشنده و مشتری شرکت را تحلیل می‌کنید.
     هدف: امتیازدهی به کیفیت لید بر اساس ۵ معیار زیر است ، برای اینکه مشخص شود آیا باید به کارشناس انسانی ارجاع داده شود یا خیر.
@@ -92,10 +92,12 @@ def leadScoring(chat: str, threshold=8) -> dict:
     \"\"\"
     """
     # prompt_template = ChatPromptTemplate.from_template(prompt)
-
+    # llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
     # chain: Runnable = prompt_template | llm | StrOutputParser()
     # response = chain.invoke({"chat": chat})
+    
     response = get_gemini_api_response(prompt.replace("{chat}", chat))
+    
     cleaned = json_parser(response)
     scores_raw = cleaned["criteria"]
     scores = {key: value["score"] for key, value in scores_raw.items()}
